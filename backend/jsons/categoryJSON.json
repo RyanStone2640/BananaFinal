@@ -1,0 +1,14 @@
+[
+    {
+        "type": "NotebookCart"
+    },
+    {
+        "type": "SmartphoneCart"
+    },
+    {
+        "type": "TabletCart"
+    },
+    {
+        "type": "Accessories"
+    }    
+]
