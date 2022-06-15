@@ -1,79 +1,89 @@
 <template>
-<div class="tableContent">
-	<h1 class='mb-5'>{{userName}}的購物清單</h1> 
-	<table class=" table table-bordered col-md-8 col-lg-6 p-3">
-	<thead>
-		<tr class="table-secondary">
-		<th scope="col">商品名稱</th>
-		<th scope="col">數量</th>
-		<th scope="col">單價</th>
-		<th scope="col">小計</th>
-		</tr>
-	</thead>
-	<tbody v-for="(data, index) of userCartInfo">
-		<tr >
-		<th scope="row" class="align-middle" >{{data.title}}</th>
-		<td class="align-middle">{{data.quantity}}</td>
-		<td class="align-middle">{{data.price}}</td>
-		<td class="align-middle">NT${{ data.quantity * data.price }}</td>
-		</tr>
-	</tbody>
-		<tfoot>
-		<tr class="table-secondary">
-		<th scope="col">Total</th>
-		<th scope="col">{{ totalNumber }}</th>
-		<th scope="col"></th>
-		<th scope="col">NT${{ totalPrice }}</th>
-		</tr>
-	</tfoot>
-	</table>
-</div>
-<hr>
+	<template v-if="userCartInfo.length == 0">
+		<h1 class="nocart">
+			目前沒有訂單喔!!!
+		</h1>		
+	</template>
 
-	<h2 class="orderTitle" style="text-align: center">訂單資料</h2>
-	<hr class="order">
-
-<div class="list">
-	<div class="list1">
-		<h3>收件資訊</h3>
-		<hr>
-		<input class="form-control mb-4" type="text" placeholder="收件人姓名" aria-label=".form-control-lg example">
-		<input class="form-control mb-4" type="text" placeholder="Email" aria-label=".form-control-lg example">
-		<input class="form-control mb-4" type="text" placeholder="Phone" aria-label=".form-control-lg example">
-		<input class="form-control mb-4" type="text" placeholder="Address" aria-label=".form-control-lg example">
-	</div>
-	<div class="list2">
-		<h3>付款方式</h3>
-		<hr>
-		<div class="form-check">
-			<input class="form-check-input" type="radio" name="flexRadioDefault" id="cash" checked>
-			<label class="form-check-label" for="cash">
-				貨到付款
-			</label>
+	<template v-else>
+		<div class="tableContent">
+			<h1 class='mb-5'>{{userName}}的購物清單</h1> 
+			<table class=" table table-bordered col-md-8 col-lg-6 p-3">
+			<thead>
+				<tr class="table-secondary">
+				<th scope="col">商品名稱</th>
+				<th scope="col">數量</th>
+				<th scope="col">單價</th>
+				<th scope="col">小計</th>
+				</tr>
+			</thead>
+			<tbody v-for="(data, index) of userCartInfo">
+				<tr >
+				<th scope="row" class="align-middle" >{{data.title}}</th>
+				<td class="align-middle">{{data.quantity}}</td>
+				<td class="align-middle">{{data.price}}</td>
+				<td class="align-middle">NT${{ data.quantity * data.price }}</td>
+				</tr>
+			</tbody>
+				<tfoot>
+				<tr class="table-secondary">
+				<th scope="col">Total</th>
+				<th scope="col">{{ totalNumber }}</th>
+				<th scope="col"></th>
+				<th scope="col">NT${{ totalPrice }}</th>
+				</tr>
+			</tfoot>
+			</table>
 		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="radio" name="flexRadioDefault" id="creditCard">
-			<label class="form-check-label" for="creditCard">
-				信用卡
-			</label>
-		</div>
-		<div class="form-check mb-5">
-			<input class="form-check-input" type="radio" name="flexRadioDefault" id="online">
-			<label class="form-check-label" for="online">
-				匯款
-			</label>
-		</div>
-
-		<h3>備註</h3>
 		<hr>
-		<textarea class="textarea" rows="5"></textarea>
-	</div>
-</div>
 
-<div class="btnGroup">
-	<button class="btn1 btn btn-secondary" @click="toProducts()">繼續購物</button>
-	<button class="btn2 btn btn-secondary">送出訂單</button>
-</div>
+			<h2 class="orderTitle" style="text-align: center">訂單資料</h2>
+			<hr class="order">
+
+		<div class="list">
+			<div class="list1">
+				<h3>收件資訊</h3>
+				<hr>
+				<input class="form-control mb-4" type="text" placeholder="收件人姓名" aria-label=".form-control-lg example">
+				<input class="form-control mb-4" type="text" placeholder="Email" aria-label=".form-control-lg example">
+				<input class="form-control mb-4" type="text" placeholder="Phone" aria-label=".form-control-lg example">
+				<input class="form-control mb-4" type="text" placeholder="Address" aria-label=".form-control-lg example">
+			</div>
+			<div class="list2">
+				<h3>付款方式</h3>
+				<hr>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="cash" checked>
+					<label class="form-check-label" for="cash">
+						貨到付款
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="creditCard">
+					<label class="form-check-label" for="creditCard">
+						信用卡
+					</label>
+				</div>
+				<div class="form-check mb-5">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="online">
+					<label class="form-check-label" for="online">
+						匯款
+					</label>
+				</div>
+
+				<h3>備註</h3>
+				<hr>
+				<textarea class="textarea" rows="5"></textarea>
+			</div>
+		</div>
+
+		<div class="btnGroup">
+			<button class="btn1 btn btn-secondary" @click="toProducts()">繼續購物</button>
+			<button class="btn2 btn btn-secondary" @click="submitOrder()">送出訂單</button>
+		</div>
+		
+	</template>
+
 	
 </template>
 <script type="text/javascript">
@@ -158,13 +168,31 @@
 	    },	  	
 	  	toProducts(){
 	  		this.$router.push('/products')
-	  	}
+	  	},
+		submitOrder(){
+		    axios.get("/createOrder")
+		    .then((res)=>{
+		    	if(res.data.status == 1){
+		      		this.$router.push('/order')
+		      	}
+		      	else{
+		      		alert('加入訂單失敗');	      		
+		      		this.$router.push('/checkout')
+		      	}
+		    })
+		    .catch((err)=>{
+		    	console.log("err");
+		    })
+		}
 	  }
 	
 	} 
 </script>
 
 <style scoped>
+.nocart{
+	min-height: 80vh;
+}	
 .table {
 	text-align: center;
 	font-size: 1.2rem;
@@ -205,6 +233,7 @@ tbody, thead, tfoot {
 	}
 	.textarea{
 		width:80%;
+		resize: none;
 	}
 	@media screen and (max-width: 768px) {
 		.list{

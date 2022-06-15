@@ -104,37 +104,20 @@ router.post('/logout', (req, res) => {
 
 
 //需要有登入才可以顯示,
-router.get('/shopcart' ,(req, res) => {
-  if (req.session.email) {
-    console.log('authenticated')
-    res.status(200).sendFile(path.join(rootPath, 'dist', 'index.html'));
-  } 
-  else {
-    console.log('not authenticated')
-    res.status(200).sendFile(path.join(rootPath, 'dist', 'index.html'));
-  }
+router.get('/shopcart', isLogin, (req, res) => {
+  res.status(200).sendFile(path.join(rootPath, 'dist', 'index.html'));
 })
 
-router.get('/member' ,(req, res) => {
-  if (req.session.email) {
-    console.log('authenticated')
+router.get('/member', isLogin, (req, res) => {
     res.status(200).sendFile(path.join(rootPath, 'dist', 'index.html'));
-  } 
-  else {
-    console.log('not authenticated')
-    res.status(200).sendFile(path.join(rootPath, 'dist', 'index.html'));
-  }
 })
 
-router.get('/checkout' ,(req, res) => {
-  if (req.session.email) {
-    console.log('authenticated')
+router.get('/checkout', isLogin, (req, res) => {
     res.status(200).sendFile(path.join(rootPath, 'dist', 'index.html'));
-  } 
-  else {
-    console.log('not authenticated')
+})
+
+router.get('/order', isLogin, (req, res) => {
     res.status(200).sendFile(path.join(rootPath, 'dist', 'index.html'));
-  }
 })
 
 

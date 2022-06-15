@@ -35,7 +35,7 @@
 			<div class="orderCard card1">
 				<h3 class="mb-3">您的訂單</h3>
 				<p>追蹤、修改或取消訂單，或進行退貨。</p>
-				<router-link to="/">查看你的訂單記錄</router-link>
+				<router-link to="/order">查看你的訂單記錄</router-link>
 			</div>
 			<div class="orderCard card2">
 				<h3 class="mb-3">聯絡客服</h3>

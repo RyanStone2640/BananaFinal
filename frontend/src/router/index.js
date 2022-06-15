@@ -11,19 +11,21 @@ import NotFoundView from '../views/NotFoundView.vue'
 import ProductView from '../views/ProductView.vue'
 import MemberView from '../views/MemberView.vue'
 import CheckOutView from '../views/CheckOutView.vue'
+import UserShopCartView from '../views/UserShopCartView.vue'
+import OrderView from '../views/OrderView.vue'
 
-import ShoppingCart from '@/components/ShopCartComponent.vue'
+// import ShoppingCart from '@/components/ShopCartComponent.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
   },
   {
     path: '/about',
     name: 'about',
-    component: AboutView
+    component: AboutView,
   },
   {
     path: '/login',
@@ -48,7 +50,7 @@ const routes = [
   {
     path: '/shopcart',
     name: 'shopcart',
-    component: ShoppingCart,
+    component: UserShopCartView,
   }, 
   {
     path: '/checkout',
@@ -60,6 +62,11 @@ const routes = [
     name: 'member',
     component: MemberView,
   },  
+  {
+    path: '/order',
+    name: 'order',
+    component: OrderView,
+  },   
   { 
     path: '/:pathMatch(.*)*', 
     name: 'NotFound', 
@@ -72,10 +79,16 @@ const router = createRouter({
   routes
 })
 
+// title
+router.beforeEach((to, from, next) => {
+  document.title = "banana"
+  next()
+})
+
 //  需登入才能顯示的路徑
 router.beforeEach(async function(to, from, next){
 
-  if (to.path == '/shopcart' || to.path == '/member' || to.path == '/checkout') {
+  if (to.path == '/shopcart' || to.path == '/member' || to.path == '/checkout'  || to.path == '/order') {
     axios.get('/authApi')
       .then((res)=>{
         if(res.data.status == 1){

@@ -1,21 +1,21 @@
 <template>
   <NavbarComponent></NavbarComponent>
-  <CheckOutComponent class="content"></CheckOutComponent>
-  <FooterComponent  class="footer"></FooterComponent>
+	<OrderComponent class="content"></OrderComponent>
+  <FooterComponent class="footer"></FooterComponent>
 </template>
 
+
 <script>
-// @ is an alias to /src
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
-import CheckOutComponent from '@/components/CheckOutComponent.vue'
+import OrderComponent from '@/components/OrderComponent.vue'
 
 export default {
-  name: 'CheckOutView',
+  name: 'OrderView',
   components: {
     NavbarComponent,
     FooterComponent,    
-    CheckOutComponent
+    OrderComponent,
   }
 }
 </script>

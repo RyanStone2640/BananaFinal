@@ -1,9 +1,11 @@
 <template>
 <div>
-  <div class="card" style="width: 18rem; height: 30rem;"> 
-      <router-link :to="`/producs/${productsId}/product/${parentProduct.imgurls[changeImgIndex].id}`">
-        <img  class="card-img-top" v-for="(img, index) of parentProduct.imgurls" :src="img.url" v-show="index == changeImgIndex">
-      </router-link>    
+  <div class="card cardmb" style="width: 18rem; height: 25rem;">
+      <div class="imgContainer">
+        <router-link :to="`/producs/${productsId}/product/${parentProduct.imgurls[changeImgIndex].id}`">
+          <img  class="card-img-top imgSize" v-for="(img, index) of parentProduct.imgurls" :src="img.url" v-show="index == changeImgIndex">
+        </router-link>         
+      </div>    
       <div class="card-body">
         <h5 class="card-title">{{ parentProduct.title }}</h5>
         <p class="card-text">NT${{ parentProduct.price }}</p>
@@ -12,7 +14,7 @@
             <button  class="btnColor" v-for="(item, index) of parentProduct.colors" :style="{background: item.Colorcode}" @click="changeImg(index)" >
             </button>         
           </div>
-          <button class="btn btn-primary" @click="addToCart(productsId, parentProduct.imgurls[changeImgIndex].id)">加入購物車</button>            
+          <button class="btn btn-secondary mt-3" @click="addToCart(productsId, parentProduct.imgurls[changeImgIndex].id)">加入購物車</button>            
         </div>
       </div>
   </div>
@@ -76,12 +78,22 @@ export default {
 }
 
 /* btn color*/
+.cardmb{
+  margin-bottom: 56px;
+}
 .btnColor{
   border-radius: 50%;
   width: 25px;
   height: 25px;
   margin: 5px;
   border: none;
+}
+.imgContainer{
+  min-height: 250px;
+}
+.imgSize{
+  width: 100%;
+  object-fit: cover;
 }
 
 </style>
