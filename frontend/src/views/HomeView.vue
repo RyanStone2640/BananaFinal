@@ -11,7 +11,7 @@
     <br>
     <h1>Bphone 13 Pro</h1>
     <h3>就。很。Pro</h3>
-    <router-link to="/">購買 ></router-link>
+    <router-link to="/producs/5/product/10">購買 ></router-link>
     <br>
     <img class="phoneImg"
       src="https://www.apple.com/v/iphone-13-pro/f/images/meta/iphone-13-pro_overview__f8jyv9tx1pe2_og.png" alt="">
@@ -20,7 +20,7 @@
     <br>
     <h1>BananaBook Pro</h1>
     <h3>超Banana</h3>
-    <router-link to="/">購買 ></router-link>
+    <router-link to="/producs/2/product/4">購買 ></router-link>
     <br>
     <img class="macImg"
       src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2021/10/19/0/14362405.png&s=Y&x=152&y=0&sw=855&sh=570&exp=3600"
