@@ -1,13 +1,11 @@
 <template>
 <main>
+
 	<div class="mainTitle">
 		<h1 class="mb-5">{{user.name}}的會員資訊</h1>
 	</div>
 	
 	<div class="mainContent mb-4">
-		<div class="pic">
-		</div>
-
 		<div class="input">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control"  aria-label="Name" aria-describedby="basic-addon1"  v-model="user.name"  v-bind:class="{ 'is-invalid': nameError }">
@@ -25,7 +23,6 @@
 				<span class="input-group-text" id="basic-addon2">email</span>
 				<div class="invalid-feedback">{{emailErrMsg}}</div>
 			</div>
-
 		</div>
 	</div>
 	<button  class="btn btn-secondary" @click="editUser()">修改個人資訊</button>
@@ -163,20 +160,13 @@ export default {
 	main {
 		padding: 2rem
 	}
-	.mainContent {
-		display: flex;
-		align-items: center;
-	}
-	.pic {
-		width:50%;
-	}
 	img {
 		height: 100%;
 		width:100%
 	}
 	.input {
+		width: 40%;
 		margin: auto;
-		width:40%
 	}
 	.orderContent {
 		background-color: rgba(223, 223, 223, 0.688);

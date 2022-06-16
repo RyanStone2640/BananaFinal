@@ -14,8 +14,6 @@ import CheckOutView from '../views/CheckOutView.vue'
 import UserShopCartView from '../views/UserShopCartView.vue'
 import OrderView from '../views/OrderView.vue'
 
-// import ShoppingCart from '@/components/ShopCartComponent.vue'
-
 const routes = [
   {
     path: '/',

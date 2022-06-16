@@ -236,6 +236,12 @@ a {
 	box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
 }
 
+@media screen and (max-width: 768px){
+  .header-main {
+    max-width: 60%;
+    margin: auto;
+  }
+}
 .sign-up {
     margin: 2em 0;
 }
@@ -416,10 +422,6 @@ input[type="checkbox" i] {
 @media(max-width:384px){
 	.main-icon span.fa {
 		margin-bottom: .6em;
-	}
-	.header-main {
-		max-width: 310px;
-		margin: 0 1em;
 	}
 	.header-left-bottom input[type="email"],.header-left-bottom input[type="password"] {
 		width: 88%;

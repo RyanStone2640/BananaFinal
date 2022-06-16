@@ -14,7 +14,7 @@
             訂單編碼:{{data[0].userOrderId}}
           </h5>
           <h5>
-            刪除購物車
+            刪除該筆訂單
             <i class="fa-solid fa-trash trashSize btnPointer" @click="removeOrder(data[0].userOrderId)"></i>
           </h5>        
         </div>
@@ -26,7 +26,6 @@
               <th scope="col">數量</th>
               <th scope="col">單價</th>
               <th scope="col">小計</th>
-              <!-- <th scope="col">刪除訂單</th>            -->
             </tr>
           </thead>
           <tbody>
@@ -47,7 +46,6 @@
               <th scope="col">{{totalNumber[index]}}</th>
               <th scope="col"></th>
               <th scope="col">NT${{totalPrice[index]}}</th>
-              <!-- <th scope="col"></th> -->
             </tr>
           </tfoot>
         </table>        

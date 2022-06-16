@@ -76,12 +76,10 @@
 				<textarea class="textarea" rows="5"></textarea>
 			</div>
 		</div>
-
-		<div class="btnGroup">
-			<button class="btn1 btn btn-secondary" @click="toProducts()">繼續購物</button>
-			<button class="btn2 btn btn-secondary" @click="submitOrder()">送出訂單</button>
-		</div>
-		
+		<div class="btn-group mt-3  btnMargin" role="group" aria-label="Basic example">
+			<router-link to='/shopcart'  class="btn btn-secondary me-3 rounded-3">繼續購物</router-link>
+			<button class="btn2 btn btn-secondary me-3 rounded-3" @click="submitOrder()">送出訂單</button>
+		</div> 		
 	</template>
 
 	
@@ -255,5 +253,5 @@ tbody, thead, tfoot {
 	.btn2 {
 		margin-right: 30%;
 		border-radius: 15%;
-	}
+	}	
 </style>

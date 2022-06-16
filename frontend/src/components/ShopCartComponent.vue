@@ -5,6 +5,7 @@
       <h1 class="nocart">
         目前購物車沒有商品喔!!!
       </h1>
+      <router-link to='/products' class="btn btn-secondary me-3 rounded-3">回到產品列表</router-link>
     </template>
 
     <template v-else>

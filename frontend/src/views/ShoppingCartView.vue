@@ -1,7 +1,7 @@
 <template>
   <NavbarComponent></NavbarComponent>
-  <div class="btn-group mt-3 mb-3" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-secondary me-3 rounded-3"  v-for="(data, index) of category" @click="changeCart(data.type)">{{ data.type }}</button>
+  <div class="btn-group mt-3 mb-3 d-flex flex-wrap m-auto" role="group" aria-label="Basic example"  style="max-width: 80%">
+    <button type="button" class="btn btn-secondary me-3 rounded-3 btnRwd"  v-for="(data, index) of category" @click="changeCart(data.type)">{{ data.type }}</button>
   </div>
   <keep-alive>
     <component :is="currentTab"></component>
@@ -57,4 +57,17 @@ export default {
 
 
 <style type="text/css" scoped>
+@media screen and (max-width: 768px){
+  .btnRwd {
+    max-width: 50%;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 576px){
+  .btnRwd {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+}
 </style>

@@ -33,7 +33,7 @@ export default {
   	}
   	axios.post("/productsAllApi", data)
   	.then((res)=>{
-  		console.log(res.data)
+  		// console.log(res.data)
   		this.products = res.data
   	}) 
   },	

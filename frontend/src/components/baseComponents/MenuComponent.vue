@@ -1,26 +1,26 @@
 <template>
 	<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 	    <li class="nav-item">
-	        <router-link class="nav-link active" aria-current="page" to="/">首頁</router-link>
+	        <router-link class="nav-link" active-class="active" aria-current="page" to="/">首頁</router-link>
 	    </li>
 	    <li class="nav-item">
-	        <router-link class="nav-link" to="/signup" v-show="!isLogin">註冊</router-link>
+	        <router-link class="nav-link" active-class="active" to="/signup" v-show="!isLogin">註冊</router-link>
 	    </li>
 	    <li class="nav-item">
-	        <router-link class="nav-link" to="/login" v-show="!isLogin">登入</router-link>
-	        	<button @click="logout()" v-show="isLogin" class="nav-link nonBtn ms-auto me-auto">登出</button>
+	        <router-link class="nav-link" active-class="active" to="/login" v-show="!isLogin">登入</router-link>
+	        <button @click="logout()" v-show="isLogin" class="nav-link nonBtn ms-auto me-auto" active-class="active">登出</button>
 	    </li>
 	    <li class="nav-item">
-	        <router-link class="nav-link" to="/about">關於我們</router-link>
+	        <router-link class="nav-link" active-class="active" to="/about">關於我們</router-link>
 	    </li>
 	    <li class="nav-item">
-	        <router-link class="nav-link" to="/products">商品一覽</router-link>
+	        <router-link class="nav-link" active-class="active"  to="/products">商品一覽</router-link>
 	    </li>
 	    <li class="nav-item">
-	        <router-link class="nav-link" to="/shopcart">購物車</router-link>	        
+	        <router-link class="nav-link" active-class="active" to="/shopcart">購物車</router-link>	        
 	    </li>	    
 	    <li class="nav-item">
-	        <router-link class="nav-link" to="/member" v-show="isLogin"><i class="fa-solid fa-user">會員資訊</i></router-link>	        
+	        <router-link class="nav-link" active-class="active" to="/member" v-show="isLogin"><i class="fa-solid fa-user">會員資訊</i></router-link>	        
 	    </li>		    
 	</ul>	
 </template>
