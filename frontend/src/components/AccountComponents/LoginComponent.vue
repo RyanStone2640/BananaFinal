@@ -2,7 +2,7 @@
 <div class="w3layouts-main"> 
 	<div class="bg-layer">
 		<h1>Login</h1>
-		<div class="header-main">
+		<form class="header-main">
 			<div class="main-icon">
 				<span class="fa fa-eercast"></span>
 			</div>
@@ -17,32 +17,35 @@
 						<span class="fa fa-lock"></span>
 						<input type="password" placeholder="Password" v-model="password" v-bind:class="{ 'is-invalid': passwordError }"/>
 						<div class="invalid-feedback">{{passwordErrMsg}}</div>
-					</div>
-<!-- 					<div class="login-check">
-						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>保持登入</label>
-					</div> -->
+					</div>					
 					<div class="bottom">
-						<button class="btn" type="submit" @click="submitAccount()">Log In</button>
+						<button class="btn" @click="submitAccount()" type='button' >Log In</button>
 					</div>
 				</div>	
 			</div>
+			<!-- google 認證 -->
+			<vue-recaptcha
+			@verify="captchaVerified"
+			@expired="captchaExpired"
+			:sitekey="siteKey"
+			:loadRecaptchaScript="true"
+			>
+			</vue-recaptcha>	
 		
-		<!-- copyright -->
-		<div class="copyright">
-			<p>© 2022 Login Form . All rights reserved | Design by <a href="banana/" target="_blank">Banana</a></p>
-		</div>
-		<!-- //copyright --> 
-	</div>
-</div>	
-
+			<!-- copyright -->
+			<div class="copyright">
+				<p>© 2022 Login Form . All rights reserved | Design by <a href="banana/" target="_blank">Banana</a></p>
+			</div>
+			<!-- //copyright --> 
+		</form>
+	</div>	
 </div>
 </template>
-
-
 
 <script>
 // use axios
 import axios from "axios";
+import { VueRecaptcha } from 'vue-recaptcha';
 
 export default {
   name: 'LoginView',
@@ -54,10 +57,14 @@ export default {
   		password: '',
   		passwordError: true,
   		passwordErrMsg: '請填入密碼!',  
+  		siteKey: "6LdhUXYgAAAAABxVg4GxTfv2W3ecOoeJUZzKAh2S",
+  		captchaVerify: "",
+  		recaptchaToken: ""
   	}
   },
-  computed:{
-  },
+  components: {
+  	VueRecaptcha 
+  },  
   watch: {
    	email: function () {
         const re = /^(([.](?=[^.]|^))|[\w_%{|}#$~`+!?-])+@(?:[\w-]+\.)+[a-zA-Z.]{2,63}$/;
@@ -93,34 +100,41 @@ export default {
 	},    
   },
   methods:{
-  	submitAccount(){
+  	submitAccount(){		
+	  	if(this.emailError===true || this.passwordError === true || this.captchaVerify == false) {
+		  	alert('輸入資料格式錯誤');
+		  	return false
+	  	} else {
 			let userData = {
 				email: this.email,
-				password: this.password
-			}  		
-
-		  if(this.emailError===true || this.passwordError === true) {
-			  alert('輸入資料格式錯誤');
-			  return false
-		  } else {
-		    axios.post("/login", userData)
-		      .then((res)=>{
-		      	if(res.data.status == 1){
+				password: this.password,
+				recaptchaToken: this.recaptchaToken
+			}  	  		
+	    	axios.post("/login", userData)
+	      	.then((res)=>{
+	      		if(res.data.status == 1){
 					alert(`您好，${res.data.userName}`);
 					this.$store.commit('addUserName', res.data.userName)
 					this.$store.commit('addUserId', res.data.userId)
-		      		this.$router.push('/shopcart')
-		      	}
-		      	else{
-		      		alert('錯誤的帳號或密碼!!');	      		
-		      		this.$router.push('/login')
-		      	}
-		      })
-		      .catch((err)=>{
-		        console.log("err");
-		     	})
-		  }			
-  	}
+	      			this.$router.push('/shopcart')
+	      		}
+	      		else{
+	      			alert('錯誤的帳號或密碼!!');	      		
+	      			this.$router.push('/login')
+	      		}
+	      	})
+	      	.catch((err)=>{
+	        	console.log("err");
+	     	})
+	  	}			
+  	},
+	captchaExpired(){
+		this.captchaVerify = false
+	},
+	captchaVerified(recaptchaToken){
+		this.captchaVerify = true
+		this.recaptchaToken = recaptchaToken
+	},
   }
 }
 </script>

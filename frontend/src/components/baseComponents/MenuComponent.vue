@@ -31,6 +31,7 @@ import axios from "axios";// use axios
 
 export default {
   name: 'MenuComponent',
+  inject:['reload'],
   data(){
     return{
     }
@@ -49,7 +50,7 @@ export default {
 	      	if(res.data.status == 1){
 						alert(`已經登出!`)
 						Cookies.remove("user") 
-	      		this.$router.push('/')
+	      		this.reload();
 	      	}
 	      })
 	      .catch((err)=>{

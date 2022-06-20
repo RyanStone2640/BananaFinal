@@ -32,6 +32,14 @@
 						<button type='button' class="btn" @click="submitSignUp()" >Sign Up</button>
 				</div>	
 			</div>
+			<!-- google 認證 -->
+			<vue-recaptcha
+			@verify="captchaVerified"
+			@expired="captchaExpired"
+			:sitekey="siteKey"
+			:loadRecaptchaScript="true"
+			>
+			</vue-recaptcha>				
 		</form>
 		
 		<!-- copyright -->
@@ -47,6 +55,7 @@
 <script>
 // use axios
 import axios from "axios";
+import { VueRecaptcha } from 'vue-recaptcha';
 
 export default {
   name: 'SignComponent',
@@ -64,8 +73,14 @@ export default {
 	  password: '',
 	  passwordError: true,
 	  passwordErrMsg: '請填入密碼!',
+	  siteKey: "6LdhUXYgAAAAABxVg4GxTfv2W3ecOoeJUZzKAh2S",
+	  captchaVerify: "",
+	  recaptchaToken: ""
   	}
   },
+  components: {
+  	VueRecaptcha 
+  },    
   watch: {
 	   name: function () {
             const re =/^[a-zA-Z0-9]+$/;
@@ -131,19 +146,19 @@ export default {
         },
   },  
   methods:{
-		submitSignUp(){
-
-			let userData = {
-				name: this.name,
-				phone: this.phone,
-				email: this.email,
-				password: this.password
-			}  		
-		  if(this.nameError=== true || this.phoneError===true || this.emailError===true || this.passwordError===true) {
+		submitSignUp(){ 		
+		  if(this.nameError=== true || this.phoneError===true || this.emailError===true || this.passwordError===true || this.captchaVerify == false) {
 			  alert('輸入格式有錯！');
 			  return false
 		  } 
 		  else {
+			let userData = {
+				name: this.name,
+				phone: this.phone,
+				email: this.email,
+				password: this.password,
+				recaptchaToken: this.recaptchaToken
+			} 		  	
 		    axios.post("/signup", userData)
 		      .then((res)=>{
 		      	// console.log(res)
@@ -160,7 +175,14 @@ export default {
 		        console.log("err");
 		      })		  	
 		  }
-		}  	
+		}, 
+		captchaExpired(){
+			this.captchaVerify = false
+		},
+		captchaVerified(recaptchaToken){
+			this.captchaVerify = true
+			this.recaptchaToken = recaptchaToken
+		},		 	
   }
 }
 </script>
